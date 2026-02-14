@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #6366f1; 
+            --text-primary: #ffffff;
+            --text-secondary: #8e9aaf;
+            --glass: blur(12px);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                var(--bg);
+            min-height: 100vh;
+        }
+
+        /* --- NAV --- */
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { 
+            font-weight: 800; 
+            letter-spacing: -1.5px; 
+            font-size: 1.4rem;
+            color: #fff;
+        }
+
+        .yt-link { 
+            text-decoration: none; 
+            color: var(--text-primary); 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: 0.2s;
+        }
+
+        .yt-link:hover { background: #fff; color: #000; }
+
+        /* --- HERO --- */
+        header {
+            max-width: 1200px;
+            margin: 2rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        h1 { 
+            font-size: 3rem; 
+            font-weight: 800; 
+            letter-spacing: -2px; 
+            margin-bottom: 0.5rem; 
+        }
+
+        header p { color: var(--text-secondary); font-size: 1.1rem; }
+
+        /* --- SEARCH --- */
+        .search-wrapper {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        #search {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--border);
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        #search:focus { border-bottom-color: var(--accent); }
+
+        /* --- GRID --- */
+        main { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* --- CARD --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            min-height: 240px;
+        }
+
+        .card:hover {
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.04);
+            transform: translateY(-4px);
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+        }
+
+        h2 { font-size: 1.2rem; margin-bottom: 0.75rem; font-weight: 700; line-height: 1.3; }
+        
+        .card p { 
+            color: var(--text-secondary); 
+            font-size: 0.9rem; 
+            margin-bottom: 2rem; 
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* --- BUTTONS --- */
+        .actions { display: flex; gap: 10px; }
+        
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .btn-p { background: white; color: black; }
+        .btn-p:hover { opacity: 0.8; }
+
+        .btn-s { border: 1px solid var(--border); color: white; }
+        .btn-s:hover { background: var(--border); }
+
+        /* Coming Soon State */
+        .card.soon { opacity: 0.4; }
+        .btn.disabled {
+            pointer-events: none;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+        }
+
+        footer { 
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem; 
+            color: var(--text-secondary); 
+            font-size: 0.8rem; 
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">flxtline</div>
+        <a href=https://www.youtube.com/@flxtline-0" target="_blank" class="yt-link">YouTube</a>
+    </nav>
+
+    <header>
+        <h1>Session Archive</h1>
+        <p>A minimalist library for retro remake project files.</p>
+    </header>
+
+    <div class="search-wrapper">
+        <input type="text" id="search" placeholder="Search sessions..." onkeyup="filter()">
+    </div>
+
+    <main>
+        <div id="grid" class="grid">
+            </div>
+    </main>
+
+    <footer>&copy; 2026 Archive Series.</footer>
+
+    <script>
+        /* HOW TO EDIT:
+           Each item below represents one slot. 
+           I have added 20 slots. Simply edit the text inside the quotes.
+        */
+        const myData = [
+            {
+                title: "New Super Mario Bros. Mini Coin Theme",
+                tag: "Retro, Video Games",
+                desc: "NSMB Soundtrack extracted from the game",
+                flp: "https://drive.google.com/drive/u/0/folders/1A00Xz9XIM1zjPfzAyMUG5dMrbSN3TLBz",
+                yt: "https://www.youtube.com/watch?v=crghxJAFGTc"
+            },
+            {
+                title: "New Super Mario Bros. World 1 Theme",
+                tag: "Retro, Video Games",
+                desc: "NSMB Soundtrack extracted from the game",
+                flp: "https://drive.google.com/drive/u/0/folders/17SsVZv2rnL0xZIZpmaCldUy3k2LpzjgB",
+                yt: "https://www.youtube.com/watch?v=4ZLE9PhcJx0"
+            },
+            {
+                title: "New Super Mario Bros. World 2 Theme",
+                tag: "Retro, Video Games",
+                desc: "NSMB Soundtrack extracted from the game",
+                flp: "https://drive.google.com/drive/u/0/folders/16eNQqutVbwxskv-SXMcIPgXtjhm9y6O_",
+                yt: "https://www.youtube.com/watch?v=HJsKjmxLqJs"
+            },
+            { title: "New Super Mario Bros. World 3 Theme", tag: "Retro, Video Games", desc: "NSMB Soundtrack extracted from the game", flp: "https://drive.google.com/drive/u/0/folders/1JtMCR-pDQZ_oUwP7lXzJgZXJcmzPpFYe", yt: "https://www.youtube.com/watch?v=cnqfxKpIdQw" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" },
+            { title: "Coming Soon", tag: "TBA", desc: "Project in development.", flp: "", yt: "" }
+        ];
+
+        function display(items) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = items.map(item => {
+                const isSoon = item.flp === "";
+                return `
+                <div class="card ${isSoon ? 'soon' : ''}">
+                    <span class="tag">${item.tag}</span>
+                    <h2>${item.title}</h2>
+                    <p>${item.desc}</p>
+                    <div class="actions">
+                        <a href="${item.flp}" target="_blank" class="btn ${isSoon ? 'disabled' : 'btn-p'}">${isSoon ? 'Locked' : 'Download'}</a>
+                        <a href="${item.yt}" target="_blank" class="btn ${isSoon ? 'disabled' : 'btn-s'}">${isSoon ? '' : 'Video'}</a>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function filter() {
+            const q = document.getElementById('search').value.toLowerCase();
+            const filtered = myData.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q));
+            display(filtered);
+        }
+
+        display(myData);
+    </script>
+</body>
+</html>
